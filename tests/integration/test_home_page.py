@@ -8,5 +8,14 @@
 # when using the application test fixture.
 
 # ADD CODE HERE
+from flask import Flask
+import pytest
+
+@pytest.mark.usefixtures("default_groups", "default_settings", "guest", "translations")
+def test_page_load( application:Flask):
+    resp = application.test_client().get('/')
+
+    assert resp.status_code == 200
+    assert "FlaskBB - A lightweight forum software in Flask" in resp.get_data(True) 
 
 ###################################################################
