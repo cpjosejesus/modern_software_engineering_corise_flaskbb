@@ -12,6 +12,9 @@ from flaskbb.utils.helpers import (
     slugify,
     time_utcnow,
     topic_is_unread,
+    to_bytes,
+    to_unicode,
+    redirect_url,
 )
 from flaskbb.utils.settings import flaskbb_config
 
@@ -24,7 +27,14 @@ from flaskbb.utils.settings import flaskbb_config
 # NOTE: You'll need to import them from flaskbb.utils.helpers
 
 # ADD CODE HERE
+def test_to_bytes():
+    assert to_bytes(u"Hello world") == b"Hello world"
 
+def test_to_unicode():
+    assert to_unicode(b"Hello world") == u"Hello world"
+
+def test_redirect_url():
+    assert redirect_url("http://example.com", use_referrer=False) == None
 ###################################################################
 
 def test_slugify():
